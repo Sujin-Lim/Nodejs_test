@@ -1,9 +1,9 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "main": "ch01_test0.js",
+  "main": "1/ch01_test0.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \\\"Error: no 1 specified\\\" && exit 1"
   },
   "author": "",
   "license": "ISC",

@@ -1,4 +1,7 @@
+//p143. 클라이언트에서 요청 시 파일 읽어 응답
+
 var http = require('http');
+var fs = require('fs');
 
 //웹 서버 객체 생성
 var server = http.createServer();
@@ -18,7 +21,13 @@ server.on('connection', function (socket) {
 //클라이언트 요청 이벤트 처리
 server.on('request', function (req, res) {
     console.log('클라이언트 요청 들어옴.');
-    console.dir(req);
+
+    var filename = 'house.png';
+    fs.readFile(filename, function(err, data){
+        res.writeHead(200, {"Content-Type": "image/png"});
+        res.write(data);
+        res.end();
+    });
 });
 
 //서버 종료 이벤트 처리
@@ -29,19 +38,3 @@ server.on('close', function () {
 
 //실행 후 웹 브라우저에서 http://localhost:3000/ 접속하면 콘솔에 결과 출력 됨
 
-//resquest 이벤트 처리
-server.on('request', function (req, res) {
-    console.log('클라이언트 요청 들어옴');
-
-    res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-    res.write("<!DOCTYPE html>");
-    res.write("<html>");
-    res.write("<head>");
-    res.write("<title>응답페이지</title>");
-    res.write("</head>");
-    res.write("<body>");
-    res.write("<h1>Node.js로부터의 응답 페이지</h1>");
-    res.write("</body>");
-    res.write("</html>");
-    res.end();
-});
